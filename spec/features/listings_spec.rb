@@ -1,11 +1,24 @@
 require 'spec_helper'
 
 feature 'Listings' do
-  background { FactoryGirl.create(:listing, description: 'hamburgers for sale') }
+  given(:description_1) { 'hamburgers for sale' }
+  given(:description_2) { 'hamburgers wanted' }
+
+  background do
+    FactoryGirl.create(:listing, description: description_1)
+    FactoryGirl.create(:listing, description: description_2)
+
+    visit('/listings')
+  end
 
   scenario 'viewing all listings' do
-    visit('/listings')
+    expect(page.text).to have_text(description_1)
+  end
 
-    expect(page.text).to have_text('hamburgers for sale')
+  scenario 'clicking a listing and viewing it on its own page' do
+    click_on description_1
+
+    expect(page.text).to have_content(description_1)
+    expect(page.text).not_to have_content(description_2)
   end
 end

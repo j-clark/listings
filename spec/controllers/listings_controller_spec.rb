@@ -18,4 +18,18 @@ describe ListingsController do
       expect(assigns(:listings)).to eq(listings)
     end
   end
+
+  describe '#show' do
+    let(:listing) { double(:listing) }
+    let(:listing_id) { '3' }
+
+
+    it 'assigns the listing' do
+      allow(Listing).to receive(:find).with(listing_id) { listing }
+
+      get :show, id: listing_id
+
+      expect(assigns(:listing)).to eq(listing)
+    end
+  end
 end
