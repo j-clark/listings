@@ -35,10 +35,22 @@ describe ListingsController do
   end
 
   describe '#new' do
-    it 'is successful' do
-      get :new
+    context 'when the user is signed in' do
+      before { sign_in FactoryGirl.create(:user) }
 
-      expect(response.status).to eq(200)
+      it 'is successful' do
+        get :new
+
+        expect(response.status).to eq(200)
+      end
+    end
+
+    context 'when the user is not signed in' do
+      it 'redirects to new_user_session_path' do
+        get :new
+
+        expect(response).to redirect_to(new_user_session_path)
+      end
     end
   end
 

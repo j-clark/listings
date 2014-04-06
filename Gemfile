@@ -6,6 +6,7 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'devise'
 
 group :test do
   gem 'rspec-rails'

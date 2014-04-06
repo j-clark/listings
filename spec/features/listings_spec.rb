@@ -5,8 +5,17 @@ feature 'Listings' do
   given(:description_2) { 'hamburgers wanted' }
   given!(:listing) { FactoryGirl.create(:listing, description: description_1) }
 
+  def log_in_as(user)
+    visit(new_user_session_path)
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_on 'Submit'
+  end
+
   background do
     FactoryGirl.create(:listing, description: description_2)
+    user = FactoryGirl.create(:user, password: 'password')
+    log_in_as(user)
 
     visit(listings_path)
   end

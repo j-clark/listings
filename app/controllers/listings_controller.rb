@@ -1,4 +1,5 @@
 class ListingsController < ApplicationController
+  before_filter :authenticate_user!, only: [:new]
   before_filter :fetch_listing, only: [:show, :edit, :update, :destroy]
 
   def new; end
