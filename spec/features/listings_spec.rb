@@ -33,4 +33,15 @@ feature 'Listings' do
     expect(page.text).to have_content('cheeseburgers for sale')
     expect(page.text).to have_content('Edit this listing')
   end
+
+  scenario 'creating a new listing' do
+    visit(listings_path)
+
+    click_on 'Create new listing'
+
+    fill_in 'Description', with: 'Curly fries in park slope'
+    click_on 'Create listing'
+
+    expect(page.text).to have_content('Curly fries in park slope')
+  end
 end

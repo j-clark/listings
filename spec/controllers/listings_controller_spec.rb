@@ -34,6 +34,39 @@ describe ListingsController do
     end
   end
 
+  describe '#show' do
+    it 'is successful' do
+      get :new
+
+      expect(response.status).to eq(200)
+    end
+  end
+
+  describe '#create' do
+    let(:new_listing) { double(:listing) }
+    let(:create_params) do
+      {
+        listing: {
+          description: 'description'
+        }.with_indifferent_access
+      }
+    end
+
+    before do
+      allow(Listing).to receive(:create) { new_listing }
+
+      post :create, create_params
+    end
+
+    it 'creates a new listing' do
+      expect(Listing).to have_received(:create).with(create_params[:listing])
+    end
+
+    it 'redirects to the newly saved listing' do
+      expect(response).to redirect_to(listing_path(new_listing))
+    end
+  end
+
   describe '#edit' do
     let(:listing) { double(:listing) }
     let(:listing_id) { '3' }

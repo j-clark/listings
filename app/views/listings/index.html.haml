@@ -1,3 +1,6 @@
+%h1
+  =link_to('Create new listing', new_listing_path)
+
 - @listings.each do |listing|
   %p
     =link_to(listing.description, listing_path(listing))

@@ -7,6 +7,16 @@ class ListingsController < ApplicationController
 
   def show; end
 
+  def new
+
+  end
+
+  def create
+    listing = Listing.create(listing_params)
+
+    redirect_to(listing_path(listing))
+  end
+
   def edit; end
 
   def update

@@ -1,0 +1,4 @@
+=form_for :listing, url: { action: :create } do |form|
+  =form.label :description
+  =form.text_area :description
+  =form.submit 'Create listing'
