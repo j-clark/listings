@@ -35,13 +35,22 @@ feature 'Listings' do
   end
 
   scenario 'creating a new listing' do
-    visit(listings_path)
-
     click_on 'Create new listing'
 
     fill_in 'Description', with: 'Curly fries in park slope'
     click_on 'Create listing'
 
     expect(page.text).to have_content('Curly fries in park slope')
+  end
+
+  scenario 'deleting a listing' do
+    expect(page.text).to have_content(listing.description)
+
+    within "#listing-#{listing.id}" do
+      click_on 'Delete this listing'
+    end
+
+    expect(page.text).to have_content('Create new listing')
+    expect(page.text).not_to have_content(listing.description)
   end
 end

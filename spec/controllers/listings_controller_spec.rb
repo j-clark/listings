@@ -34,7 +34,7 @@ describe ListingsController do
     end
   end
 
-  describe '#show' do
+  describe '#new' do
     it 'is successful' do
       get :new
 
@@ -104,6 +104,26 @@ describe ListingsController do
 
     it 'redirects to the listing' do
       expect(response).to redirect_to(listing_path(listing))
+    end
+  end
+
+  describe '#destroy' do
+    let(:listing) { double(:listing) }
+    let(:listing_id) { '7' }
+
+    before do
+      allow(Listing).to receive(:find).with(listing_id) { listing }
+      allow(listing).to receive(:destroy)
+
+      delete :destroy, id: listing_id
+    end
+
+    it 'destroys the listing' do
+      expect(listing).to have_received(:destroy)
+    end
+
+    it 'redirects to the index page' do
+      expect(response).to redirect_to(listings_path)
     end
   end
 end

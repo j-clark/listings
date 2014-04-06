@@ -2,5 +2,6 @@
   =link_to('Create new listing', new_listing_path)
 
 - @listings.each do |listing|
-  %p
-    =link_to(listing.description, listing_path(listing))
+  %div{ id: "listing-#{listing.id}" }
+    %p=link_to(listing.description, listing_path(listing))
+    %span= button_to('Delete this listing', listing_path(listing), method: :delete)
