@@ -4,7 +4,7 @@ development:
   database: listings_development
   pool: 5
   username: root
-  password: password
+  password: <%= ENV['DB_PASSWORD'] %>
   host: localhost
 
 test:
@@ -13,7 +13,7 @@ test:
   database: listings_test
   pool: 5
   username: root
-  password: password
+  password: <%= ENV['DB_PASSWORD'] %>
   host: localhost
 
 production:
@@ -22,5 +22,5 @@ production:
   database: listings_production
   pool: 5
   username: root
-  password: password
+  password: <%= ENV['DB_PASSWORD'] %>
   host: localhost
