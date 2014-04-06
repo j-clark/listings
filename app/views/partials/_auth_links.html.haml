@@ -1,5 +1,6 @@
-- if current_user.present?
-  %div=button_to('Sign out', destroy_user_session_path, method: :delete)
-- else
-  %div=link_to('Sign in', new_user_session_path)
-  %div=link_to('Sign up', new_user_registration_path)
+.auth-links
+  - if current_user.present?
+    %div=link_to('Sign out', destroy_user_session_path, method: :delete)
+  - else
+    %span=link_to('Sign in', new_user_session_path)
+    %span=link_to('Sign up', new_user_registration_path)

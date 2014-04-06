@@ -3,15 +3,19 @@
   %head
     %title
       Listings
-      = stylesheet_link_tag("application", media: "all", "data-turbolinks-track" => true)
-      = javascript_include_tag("application", "data-turbolinks-track" => true)
-      = csrf_meta_tags
+    = stylesheet_link_tag("application", media: "all", "data-turbolinks-track" => true)
+    = javascript_include_tag("application", "data-turbolinks-track" => true)
+    = csrf_meta_tags
   %body
-    = render 'partials/auth_links'
+    .header
+      = render 'partials/auth_links'
 
-    %p{ class: 'notice' }
-      =notice
-    %p{ class: 'alert' }
-      =alert
+    - if notice.present?
+      %p{ class: 'blue message dismissible' }
+        =notice
+    - if alert.present? 
+      %p{ class: 'alert message' }
+        =alert
 
-    = yield
+    %div{ class: 'one whole padded' }
+      = yield
