@@ -23,13 +23,54 @@ describe ListingsController do
     let(:listing) { double(:listing) }
     let(:listing_id) { '3' }
 
-
-    it 'assigns the listing' do
+    before do
       allow(Listing).to receive(:find).with(listing_id) { listing }
 
       get :show, id: listing_id
+    end
 
+    it 'assigns the listing' do
       expect(assigns(:listing)).to eq(listing)
+    end
+  end
+
+  describe '#edit' do
+    let(:listing) { double(:listing) }
+    let(:listing_id) { '3' }
+
+    before do
+      allow(Listing).to receive(:find).with(listing_id) { listing }
+
+      get :edit, id: listing_id
+    end
+
+    it 'assigns the listing' do
+      expect(assigns(:listing)).to eq(listing)
+    end
+  end
+
+  describe '#update' do
+    let(:listing) { double(:listing, update: true) }
+    let(:listing_id) { '3' }
+    let(:update_params) do
+      {
+        listing: { description: 'description' }.with_indifferent_access,
+        id: listing_id
+      }
+    end
+
+    before do
+      allow(Listing).to receive(:find).with(listing_id) { listing }
+
+      patch :update, update_params
+    end
+
+    it 'assigns the listing' do
+      expect(listing).to have_received(:update).with(update_params[:listing])
+    end
+
+    it 'redirects to the listing' do
+      expect(response).to redirect_to(listing_path(listing))
     end
   end
 end
