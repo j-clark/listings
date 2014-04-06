@@ -10,11 +10,11 @@ gem 'turbolinks'
 group :test do
   gem 'rspec-rails'
   gem 'capybara-rails'
-  gem 'factory_girl_rails'
-  gem 'faker'
 end
 
 group :test, :development do
+  gem 'factory_girl_rails'
+  gem 'faker'
   gem 'pry'
   gem 'pry-rails'
 end
